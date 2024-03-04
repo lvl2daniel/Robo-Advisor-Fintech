@@ -17,7 +17,7 @@ def result():
     age = int(request.form["age"])
     risk = request.form["risk_tolerance"]
     gender = request.form["gender"]
-    # switch case for risk tolerance
+    # Allocate 100% to equities initially.
     equities = 100
     fixed_income = 0
     if gender == "male":
@@ -27,6 +27,7 @@ def result():
     else:
         life_expectancy = 77
     remaining_years = life_expectancy - age
+    # Adjust allocation to accomodate for risk and remaining life expectancy.
     match risk:
         case "low":
             equities -= 35
@@ -66,6 +67,7 @@ def result():
     risk = risk.capitalize()
     gender = gender.capitalize()
 
+    # Display the user's stats and recommended allocation.
     stats = f"Age: {age},\t Risk Tolerance: {risk},\t Gender: {gender}" 
     allocation = f"Equities: {equities}% \n Fixed Income: {fixed_income}% \n"
     return render_template('result.html', stats=stats, allocation=allocation)
